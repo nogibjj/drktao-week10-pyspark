@@ -1,12 +1,21 @@
-from mylib.extract import extract
-from mylib.transform_load import load
-from mylib.query import complex_query
+from mylib.lib import (
+    extract,
+    load,
+    query,
+    data_transform,
+    start_spark,
+    end_spark,
+)
 
-print("Extracting data...")
-extract()
 
-print("Loading data...")
-load()
+def main():
+    extract()
+    spark = start_spark("Fifa22")
+    df = load(spark)
+    query(spark, df)
+    data_transform(df)
+    end_spark(spark)
 
-print("Querying data...")
-complex_query()
+
+if __name__ == "__main__":
+    main()
