@@ -17,7 +17,7 @@ def end_spark(spark):
     spark.stop()
     return "stopped spark session"
 
-def extract(url = "https://github.com/nogibjj/drktao-week10-pyspark/blob/main/data/fifa22.csv",
+def extract(url = "https://raw.githubusercontent.com/nogibjj/drktao-week10-pyspark/main/data/fifa22.csv",
             file_path = "data/fifa22.csv"):
     """"Extract a url to a file path"""
     with requests.get(url, timeout = 10) as r:
@@ -27,7 +27,7 @@ def extract(url = "https://github.com/nogibjj/drktao-week10-pyspark/blob/main/da
 
 def load(spark, data="data/fifa22.csv"):
     schema = StructType([
-        StructField("Short_Name", StringType(), True),
+        StructField("Name", StringType(), True),
         StructField("Overall", IntegerType(), True),
         StructField("Potential", IntegerType(), True),
         StructField("Age", IntegerType(), True),
