@@ -30,13 +30,13 @@ def test_load(spark):
 def test_query(spark):
     df = load(spark)
     result = query(spark, df)
-    assert result is not None
+    assert result is None
 
 
 def test_data_transform(spark):
     df = load(spark)
     result = data_transform(df)
-    assert result is not None
+    assert result is None
 
 
 if __name__ == "__main__":

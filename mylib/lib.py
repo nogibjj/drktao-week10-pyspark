@@ -1,7 +1,6 @@
-import os
 import requests
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import when, col
+from pyspark.sql.functions import col
 
 from pyspark.sql.types import (
      StructType, 
@@ -26,7 +25,7 @@ def extract(url = "https://github.com/nogibjj/drktao-week10-pyspark/blob/main/da
             f.write(r.content)
     return file_path
 
-def load(spark, data="data/fifa22.csv", name="Fifa22"):
+def load(spark, data="data/fifa22.csv"):
     schema = StructType([
         StructField("Short_Name", StringType(), True),
         StructField("Overall", IntegerType(), True),
@@ -55,9 +54,9 @@ def load(spark, data="data/fifa22.csv", name="Fifa22"):
 
 def query(spark, df, name = 'players'): 
     df = df.createOrReplaceTempView(name)
-    query = "SELECT * FROM players WHERE Club_Position == 'RW'"
+    sql_query = "SELECT * FROM players WHERE Club_Position == 'RW'"
 
-    return spark.sql(query).show()
+    return spark.sql(sql_query).show()
 
 def data_transform(df):
     df = df.withColumn("Potential_Difference", col("Potential")-col("Overall"))
