@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: set up environment variables
-        run: |
-          echo "SERVER_HOSTNAME=${{ secrets.SERVER_HOSTNAME }}" >> $GITHUB_ENV
-          echo "HTTP_PATH=${{  secrets.HTTP_PATH }}" >> $GITHUB_ENV
-          echo "TOKEN=${{ secrets.TOKEN }}" >> $GITHUB_ENV
       - name: install packages
         run: make install
       - name: lint
@@ -24,5 +19,3 @@ jobs:
         run: make test
       - name: format
         run: make format
-      - name: deploy
-        run: make deploy
